@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="2dp"
+    tools:context="com.infobrain.meroticket.Activities.BookingDetails">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                card_view:cardCornerRadius="2dp"
+                card_view:cardElevation="5dp"
+                card_view:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Booking Details"
+                        android:layout_marginTop="5dp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/custom_textview"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bus No:"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/Bus_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Na 2 kha 1234" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/custom_textview"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Departure Date:"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/Departure_Date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="25,Nov,2017, at 9:00 am" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/custom_textview"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Boarding Point:"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/Boarding_point"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Gongabu" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/custom_textview"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Seats:"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/select_seat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="A1" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/custom_textview"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Price NRs:"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/total_price"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="800" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                card_view:cardCornerRadius="2dp"
+                card_view:cardElevation="5dp"
+                card_view:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Passenger Deatils"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/passenger_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/custom_textview"
+                        android:ems="10"
+                        android:hint="Name"
+                        android:padding="10dp"
+                        android:nextFocusRight="@+id/passenger_contactno"
+                        android:singleLine="true"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+                    <EditText
+                        android:id="@+id/passenger_contactno"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/custom_textview"
+                        android:ems="10"
+                        android:inputType="phone"
+                        android:hint="Contact No."
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:nextFocusRight="@+id/passenger_email"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+                    <EditText
+                        android:id="@+id/passenger_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/custom_textview"
+                        android:ems="10"
+                        android:hint="example@example.com"
+                        android:inputType="textEmailAddress"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:nextFocusRight="@+id/passenger_address"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+                    <EditText
+                        android:id="@+id/passenger_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/custom_textview"
+                        android:ems="10"
+                        android:hint="Address"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:id="@+id/book_btn"
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/round_button_style"
+                android:text="Book"
+                android:textColor="#ffff" />
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.infobrain.meroticket">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".Activities.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activities.FromLocationActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".Activities.BusActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".Activities.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ToLocationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".Activities.ChooseBusSeat"
+            android:launchMode="singleTop"
+            android:parentActivityName=".Activities.BusActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.BordingPoint"
+            android:label="Boarding point"
+            android:parentActivityName=".Activities.ChooseBusSeat" />
+        <activity
+            android:name=".Activities.BookingDetails"
+            android:parentActivityName=".Activities.BordingPoint"></activity>
+        <activity
+            android:name=".Activities.Combo_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity android:name=".Activities.SplashSceen"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"></activity>
+    </application>
+
+</manifest>

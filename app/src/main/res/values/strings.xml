@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MeroTicket</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="from">from</string>
+    <string name="to">to</string>
+    <string name="date">date</string>
+    <string name="day_night">daynight</string>
+
+
+</resources>
