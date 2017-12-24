@@ -59,7 +59,7 @@
 
                     <TextView
                         android:id="@+id/bus_time"
-                        android:layout_width="112dp"
+                        android:layout_width="116dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
                         android:layout_marginBottom="12dp"
@@ -74,12 +74,13 @@
                 android:layout_width="1dp"
                 android:layout_height="88dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="2dp"
+                android:layout_marginLeft="10dp"
                 android:background="#7b969696" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingLeft="8dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -99,7 +100,7 @@
                         android:textStyle="bold" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:paddingLeft="5dp">
@@ -138,7 +139,7 @@
 
                     <TextView
                         android:id="@+id/bus_features"
-                        android:layout_width="150dp"
+                        android:layout_width="200dp"
                         android:layout_height="match_parent"
                         android:text="AC/WI-FI/FOOD"
                         android:textSize="12sp"

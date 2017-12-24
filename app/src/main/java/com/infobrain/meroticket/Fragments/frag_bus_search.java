@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -19,6 +20,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -47,6 +50,7 @@ import java.util.Locale;
  */
 
 public class frag_bus_search extends Fragment {
+    Boolean fab_flag = false;
     RadioButton daybtn, nightbtn, bothbtn;
     RadioGroup radioGroup;
     ListView list_place;
@@ -56,6 +60,7 @@ public class frag_bus_search extends Fragment {
     String stringDate;
     Calendar calendar;
     Button search_btn;
+    FloatingActionButton myFab;
     String day_night = "BOTH";
     public static String datevalue;
     String location_from, location_to;
@@ -68,6 +73,7 @@ public class frag_bus_search extends Fragment {
     String to_day_date;
     String loc = "";
     int change_month;
+    private Animation fab_open, fab_close, rotate_forward, rotate_backward;
 
 
     @Nullable
@@ -91,6 +97,10 @@ public class frag_bus_search extends Fragment {
         //pref_title = this.getActivity().getSharedPreferences("TITLENAME", 0);
         pref_date = this.getActivity().getSharedPreferences("DATE", 0);
         pref_state = this.getActivity().getSharedPreferences("STATE", 0);
+        fab_open = AnimationUtils.loadAnimation(getContext(), R.anim.fb_open);
+        fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.fb_close);
+        rotate_forward = AnimationUtils.loadAnimation(getContext(), R.anim.fb_forward);
+        rotate_backward = AnimationUtils.loadAnimation(getContext(), R.anim.fb_backward);
 
         date_picker = (CardView) view.findViewById(R.id.calender);
         get_date = (TextView) view.findViewById(R.id._date);
@@ -173,6 +183,17 @@ public class frag_bus_search extends Fragment {
         nightbtn.setOnClickListener(this)*/
         ;
 
+
+        //Flip Action
+        myFab = (FloatingActionButton) view.findViewById(R.id.flip_btn);
+        myFab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                flipfiled();
+
+            }
+        });
+
+
         //search button event
         search_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -209,6 +230,8 @@ public class frag_bus_search extends Fragment {
                     int monthValue = mm1 + 1;
                     Intent intent = new Intent(getContext(), BusActivity.class);
                     Bundle extras = new Bundle();
+                    Log.e("SEND FROM LOCATION", location_from);
+                    Log.e("SEND TO LOCATION", location_to);
                     extras.putString("EXTRA_FROM", location_from);
                     extras.putString("EXTRA_TO", location_to);
                     extras.putInt("YEAR", yy1);
@@ -277,6 +300,63 @@ public class frag_bus_search extends Fragment {
                 showDatePickerDialog();
             }
         });
+    }
+
+
+    public void flipfiled() {
+        String temp;
+        String temp2;
+        if (from_txtview.getText().toString().isEmpty() || to_txtview.getText().toString().isEmpty()) {
+
+        } else {
+            if (fab_flag.equals(false)) {
+
+                fab_flag = true;
+                from_txtview.setText(location_to);
+                to_txtview.setText(location_from);
+                myFab.startAnimation(rotate_forward);
+
+                temp2 = location_from;
+                location_from = location_to;
+                location_to = temp2;
+                stateEditor = pref_state.edit();
+                dateditor = pref_date.edit();
+                //editors.putString("from_name", from_txtview.getText().toString());
+                //Log.e(from_txtview.getText().toString(),"FROM NAME:");
+                //editors.putString("to_name", to_txtview.getText().toString());
+                SharedPreferences.Editor editor1 = pref_from.edit();
+                SharedPreferences.Editor editor2 = pref_to.edit();
+                editor1.putString("from_name", location_from);
+                editor2.putString("to_name", location_to);
+                editor1.commit();
+                editor2.commit();
+
+                /*Log.e("BEFORE_FLIP_from", location_from);
+                Log.e("BEFORE_FLIP_to", location_to);*/
+
+            } else if(fab_flag.equals(true)) {
+                fab_flag = false;
+                from_txtview.setText(location_to);
+                to_txtview.setText(location_from);
+                myFab.startAnimation(rotate_forward);
+
+
+                temp = location_from;
+                location_from = location_to;
+                location_to = temp;
+                SharedPreferences.Editor editor1 = pref_from.edit();
+                SharedPreferences.Editor editor2 = pref_to.edit();
+                editor1.putString("from_name", location_from);
+                editor2.putString("to_name", location_to);
+                editor1.commit();
+                editor2.commit();
+
+                Log.e("AFTER_FLIP_from", location_from);
+                Log.e("AFTER_FLIP_to", location_to);
+
+
+            }
+        }
     }
 
     public void checkRadio(String day_night) {

@@ -13,92 +13,107 @@
         card_view:cardElevation="2dp"
         card_view:cardCornerRadius="6dp"
         card_view:cardUseCompatPadding="true">
+
         <RelativeLayout
             android:id="@+id/card_from_to"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="12dp">
+
             <LinearLayout
                 android:id="@+id/from"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="8dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="From"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorPrimary"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/icon_bus"/>
+                    android:background="@drawable/icon_bus" />
 
             </LinearLayout>
 
             <EditText
                 android:id="@+id/location_from"
-                android:layout_width="match_parent"
+                android:layout_width="165dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
                 android:layout_toEndOf="@+id/from"
-                android:layout_marginTop="45dp"
-                android:hint="Select Location"
-                android:focusableInTouchMode="false"
-                android:textSize="18sp"
                 android:editable="false"
+                android:focusableInTouchMode="false"
+                android:hint="Select Location"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat"
-                />
+                android:textSize="18sp" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/flip_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/location_from"
+                android:layout_marginTop="8dp"
+                android:elevation="5dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/flip"/>
 
             <LinearLayout
                 android:id="@+id/to"
-                android:layout_below="@+id/from"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
+                android:layout_below="@+id/from"
                 android:layout_marginTop="-10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="8dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="To"
                     android:textColor="@color/colorPrimary"
-                    android:textStyle="bold"
                     android:textSize="16sp"
-                    android:text="To"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/icon_bus"/>
+                    android:background="@drawable/icon_bus" />
 
             </LinearLayout>
+
             <EditText
                 android:id="@+id/location_to"
-                android:layout_width="match_parent"
+                android:layout_width="165dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="125dp"
                 android:layout_toEndOf="@+id/from"
-                android:layout_marginTop="130dp"
-                android:hint="Select Location"
-                android:textSize="18sp"
-                android:focusableInTouchMode="false"
                 android:editable="false"
+                android:focusableInTouchMode="false"
+                android:hint="Select Location"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat"
-                />
+                android:textSize="18sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/to">
+
                 <TextView
                     android:id="@+id/id_warning_txt"
-                    android:gravity="center"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    android:textColor="@color/colorPrimary"
-                    android:textAlignment="center"
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="@color/colorPrimary"
+                    android:visibility="gone" />
             </RelativeLayout>
         </RelativeLayout>
 

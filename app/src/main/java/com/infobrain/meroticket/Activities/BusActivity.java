@@ -49,8 +49,6 @@ import java.util.Map;
 
 public class BusActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     String yer, mnth, dy;
-    private String URL_DATA = "http://192.168.0.105/MeroTicket/bus_details.php";
-    private String URL_DATA2 = "http://192.168.0.105/MeroTicket/data_fetch.php";
     private String date_values;
     private ListView bus_listView;
     Date to_days, obtain_days;
@@ -88,7 +86,9 @@ public class BusActivity extends AppCompatActivity implements AdapterView.OnItem
 
         Bundle extras = getIntent().getExtras();
         from = extras.getString("EXTRA_FROM");
+        Log.e("FROM Location",from);
         to = extras.getString("EXTRA_TO");
+        Log.e("TO Location",to);
         year = extras.getInt("YEAR");
         yer = Integer.toString(year);
         month = extras.getInt("MONTH")+1;
@@ -100,7 +100,7 @@ public class BusActivity extends AppCompatActivity implements AdapterView.OnItem
         Log.e("TODAY KO VALUE", to_day);
         System.out.println("INTENT PASS TODAY_DATE:"+to_day);
         System.out.println("INTENT PASS MONTH VALUE:"+month);
-        load_bus_list(from,to);
+
 
         //        checkDate(to_day);
 //        checkDate(to_day);
@@ -110,6 +110,7 @@ public class BusActivity extends AppCompatActivity implements AdapterView.OnItem
         //Toast.makeText(this, to_day + sourceDate, Toast.LENGTH_LONG).show();
 
         checkDate(sourceDate);
+        load_bus_list(from,to,sourceDate);
 
         //to_txtview.setText(location_to);
         //this.setTitle(from_title + " to " + to_title);
@@ -138,7 +139,7 @@ public class BusActivity extends AppCompatActivity implements AdapterView.OnItem
                 checkDate(destDate);
                 Log.e("NEXTBUTTON",destDate);
                 busLayout_dataModels.clear();
-                load_bus_list(from,to);
+                load_bus_list(from,to,destDate);
                 bus_listView = findViewById(R.id.bus_list);
                 busAdapter = new BusAdapter(busLayout_dataModels, getApplicationContext());
                 bus_listView.setAdapter(busAdapter);
@@ -165,7 +166,7 @@ public class BusActivity extends AppCompatActivity implements AdapterView.OnItem
                 checkDate(destDate);
 
                 busLayout_dataModels.clear();
-                load_bus_list(from,to);
+                load_bus_list(from,to,destDate);
                 bus_listView = findViewById(R.id.bus_list);
                 busAdapter = new BusAdapter(busLayout_dataModels, getApplicationContext());
                 bus_listView.setAdapter(busAdapter);
@@ -179,8 +180,8 @@ public class BusActivity extends AppCompatActivity implements AdapterView.OnItem
 
     }
 
-    public void load_bus_list(String froms,String tos) {
-        String url="https://laxmicapital.com.np/abc/services/webservice.asmx/Get_Searched_Bus?C_Code=1001&F_City="+froms+"&T_City="+tos+"&Date=&"+"B_Type="+"Day";
+    public void load_bus_list(String froms,String tos,String sourceDate) {
+        String url="https://laxmicapital.com.np/abc/services/webservice.asmx/Get_Searched_Bus?C_Code=1001&F_City="+froms+"&T_City="+tos+"&Date="+sourceDate+"&"+"B_Type="+"Day";
         /*String URL_VALUE;
         URL_VALUE = url;*/
         Log.e("URL",url);
@@ -247,6 +248,7 @@ public class BusActivity extends AppCompatActivity implements AdapterView.OnItem
 
         Intent intent = new Intent(getApplicationContext(), ChooseBusSeat.class);
         intent.putExtra("bus_name", busLayout_dataModel.getBus_name());
+        intent.putExtra("seat_price",busLayout_dataModel.getBus_seat_price());
 
         startActivity(intent);
     }

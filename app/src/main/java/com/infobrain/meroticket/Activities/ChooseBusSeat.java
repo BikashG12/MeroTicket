@@ -31,7 +31,7 @@ public class ChooseBusSeat extends AppCompatActivity implements GridView.OnItemC
     TextView snack;
     /*CardView card_snack;*/
     RelativeLayout card_snack;
-    String bus_name;
+    String bus_name, bus_price;
 
     TextView proceed;
 
@@ -39,10 +39,10 @@ public class ChooseBusSeat extends AppCompatActivity implements GridView.OnItemC
 
     LinearLayout Layout_Of_Grid_View;
 
-    float SeatPrice = 600;
+    float SeatPrice;
     float total_price;
 
-   // Integer counter = 0;
+    // Integer counter = 0;
 
     TextView seat_all, price;
 
@@ -83,8 +83,10 @@ public class ChooseBusSeat extends AppCompatActivity implements GridView.OnItemC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_busseat);
-        bus_name=getIntent().getStringExtra("bus_name");
+        bus_name = getIntent().getStringExtra("bus_name");
         this.setTitle(bus_name);
+        bus_price = getIntent().getStringExtra("seat_price");
+        SeatPrice=Float.parseFloat(bus_price);
         gridView = findViewById(R.id.choose_seats);
 
         Layout_Of_Grid_View = findViewById(R.id.grid_view);
@@ -120,7 +122,6 @@ public class ChooseBusSeat extends AppCompatActivity implements GridView.OnItemC
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
     @Override
@@ -783,7 +784,7 @@ public class ChooseBusSeat extends AppCompatActivity implements GridView.OnItemC
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.image_menu, menu);
-        MenuItem item=menu.findItem(R.id.action_image);
+        MenuItem item = menu.findItem(R.id.action_image);
         item.getItemId();
         return true;
     }
@@ -798,7 +799,8 @@ public class ChooseBusSeat extends AppCompatActivity implements GridView.OnItemC
             card_snack.setVisibility(View.VISIBLE);
         }
     }
-    public void DialogImage(){
+
+    public void DialogImage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         LayoutInflater inflater = this.getLayoutInflater();
