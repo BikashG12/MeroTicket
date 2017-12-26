@@ -10,6 +10,8 @@
     <string name="to">to</string>
     <string name="date">date</string>
     <string name="day_night">daynight</string>
+    <string name="Exit">EXIT</string>
+    <string name="TryAgain">TRY AGAIN</string>
 
 
 </resources>
