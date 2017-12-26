@@ -2,6 +2,8 @@ package com.infobrain.meroticket.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,14 +17,19 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.infobrain.meroticket.R;
+import com.infobrain.meroticket.SqliteDB.DBHelper;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ToLocationActivity extends AppCompatActivity {
     SharedPreferences preferences;
     ListView listView;
     MaterialSearchView searchView;
+    List<String> locationList = new ArrayList<>();
     public static final String[] location_names = new String[]{
-            "Kathmandu", "Pokhara", "Lamjung", "Biratanagar", "Gorkha", "Baglung", "Mustang", "Jhapa", "Nepalgunj", "Bhaktapur", "Panauti", "Dolkha","Birjunj"
+            "Kathmandu", "Pokhara", "Lamjung", "Biratanagar", "Gorkha", "Baglung", "Mustang", "Jhapa", "Nepalgunj", "Bhaktapur", "Panauti", "Dolkha", "Birjunj"
     };
 
     @Override
@@ -38,9 +45,10 @@ public class ToLocationActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         preferences = getSharedPreferences("TONAME", 0);
         listView = (ListView) findViewById(R.id.location_list);
+        getCityList();
 
 
-        final ArrayAdapter to_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, location_names);
+        final ArrayAdapter to_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, locationList);
         listView.setAdapter(to_adapter);
 
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
@@ -97,5 +105,23 @@ public class ToLocationActivity extends AppCompatActivity {
         searchView.setMenuItem(item);
 
         return true;
+    }
+
+    public void getCityList() {
+        String selectQuery = "SELECT " + DBHelper.COLUMN_LOCATION + " FROM " + DBHelper.TABLE_LOCATION;
+        SQLiteDatabase database = new DBHelper(this).getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+
+                locationList.add(cursor.getString(0));
+
+            } while (cursor.moveToNext());
+        }
+        final ArrayAdapter lo_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, locationList);
+        listView.setAdapter(lo_adapter);
+
     }
 }

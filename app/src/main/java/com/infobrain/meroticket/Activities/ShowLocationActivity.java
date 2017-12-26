@@ -45,24 +45,9 @@ public class ShowLocationActivity extends AppCompatActivity implements AdapterVi
         Toast toast = Toast.makeText(this, instantObject.getLocation_name(), Toast.LENGTH_SHORT);
         toast.show();
         Intent intent = new Intent(this, MainActivity.class);
-        // lo_name=instantObject.getLocation_name();
-        //sendData(lo_name);
-        //intent.putExtra("location_name",instantObject.getLocation_name());
-        /*Bundle bundle= new Bundle();
-        bundle.putString("VALUE",instantObject.getLocation_name());
-        frag_bus_search bus_search= new frag_bus_search();
-        bus_search.setArguments(bundle);
-        getActivity().finish();*/
-        //String location_chooose=instantObject.getLocation_name();
-        //lo_name=location_chooose;
-
         startActivity(intent);
     }
 
-    /* public String getMydata(){
-         return lo_name;
-     }
- */
     public void sendData(String place_value) {
         Bundle bundle = new Bundle();
         bundle.putString("PLACE", place_value);
