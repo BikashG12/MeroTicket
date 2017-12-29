@@ -79,7 +79,7 @@ public class FromLocationActivity extends AppCompatActivity {
     }
 
     public void getCityList(){
-        String selectQuery = "SELECT " + DBHelper.COLUMN_LOCATION + " FROM " + DBHelper.TABLE_LOCATION;
+        String selectQuery = "SELECT DISTINCT " + DBHelper.COLUMN_LOCATION + " FROM " + DBHelper.TABLE_LOCATION;
         SQLiteDatabase database = new DBHelper(this).getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
 
@@ -117,9 +117,11 @@ public class FromLocationActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         Intent intent= new Intent(FromLocationActivity.this,MainActivity.class);
         finish();
         startActivity(intent);
-        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+
     }
 }

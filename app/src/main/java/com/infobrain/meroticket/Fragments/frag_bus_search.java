@@ -254,6 +254,7 @@ public class frag_bus_search extends Fragment {
                     stateEditor.commit();
                     dateditor.commit();
                     startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 }
 
 
@@ -269,6 +270,7 @@ public class frag_bus_search extends Fragment {
                 Intent intent = new Intent(getContext(), FromLocationActivity.class);
                 // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 //getActivity().finish();
                /* Fragment fragment = new From_frag();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -288,6 +290,7 @@ public class frag_bus_search extends Fragment {
                 Intent intent = new Intent(getContext(), ToLocationActivity.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 //getActivity().finishAffinity();
 
             }

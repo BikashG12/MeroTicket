@@ -26,6 +26,7 @@ import com.infobrain.meroticket.Fragments.frag_home;
 import com.infobrain.meroticket.Fragments.frag_setting;
 import com.infobrain.meroticket.R;
 import com.infobrain.meroticket.SqliteDB.DBHelper;
+import com.infobrain.meroticket.SqliteDB.SQLiteOperations;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -138,17 +139,24 @@ public class MainActivity extends AppCompatActivity
     protected void onDestroy() {
         DBHelper hlpr = new DBHelper(MainActivity.this);
         SQLiteDatabase db = hlpr.getWritableDatabase();
+        SQLiteOperations sqlte = new SQLiteOperations(hlpr, db);
         hlpr.onUpgrade(db,0,0);
+        sqlte.onUpgrade(db);
+
+
         pref_from = this.getApplicationContext().getSharedPreferences("FROMNAME", 0);
         pref_from.edit().remove("from_name").commit();
 
         pref_to = this.getApplicationContext().getSharedPreferences("TONAME", 0);
         pref_to.edit().remove("to_name").commit();
         // pref_to.edit().clear();
+
         pref_state= this.getApplicationContext().getSharedPreferences("STATE", 0);
         pref_state.edit().remove("day_night").commit();
+
         pref_date = this.getApplicationContext().getSharedPreferences("DATE", 0);
         pref_date.edit().remove("date").commit();
+
         super.onDestroy();
     }
 }

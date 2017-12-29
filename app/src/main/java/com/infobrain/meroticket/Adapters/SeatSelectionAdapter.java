@@ -72,8 +72,8 @@ public class SeatSelectionAdapter extends BaseAdapter {
             , 0, 0
             , 0, 0
             , 0, 0
-            , 0, R.drawable.icon_bus_seat_normal
-            , R.drawable.icon_bus_seat_normal, 0
+            , 0, 0
+            , 0, 0
             , R.drawable.icon_bus_seat_normal, R.drawable.icon_bus_seat_normal
             , R.drawable.icon_bus_seat_normal, R.drawable.icon_bus_seat_normal
             , 0, R.drawable.icon_bus_seat_normal
@@ -86,6 +86,9 @@ public class SeatSelectionAdapter extends BaseAdapter {
             , R.drawable.icon_bus_seat_normal, 0
             , R.drawable.icon_bus_seat_normal, R.drawable.icon_bus_seat_normal
             , R.drawable.icon_bus_seat_normal, R.drawable.icon_bus_seat_normal
+            , 0, R.drawable.icon_bus_seat_normal
+            , R.drawable.icon_bus_seat_normal, R.drawable.icon_bus_seat_normal,
+            R.drawable.icon_bus_seat_normal
             , 0, R.drawable.icon_bus_seat_normal
             , R.drawable.icon_bus_seat_normal, R.drawable.icon_bus_seat_normal
             , R.drawable.icon_bus_seat_normal, R.drawable.icon_bus_seat_normal

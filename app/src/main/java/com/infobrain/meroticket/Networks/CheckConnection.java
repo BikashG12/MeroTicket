@@ -13,7 +13,6 @@ public class CheckConnection {
 
         ConnectivityManager con_manager = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
         return (con_manager.getActiveNetworkInfo() != null
                 && con_manager.getActiveNetworkInfo().isAvailable()
                 && con_manager.getActiveNetworkInfo().isConnected());

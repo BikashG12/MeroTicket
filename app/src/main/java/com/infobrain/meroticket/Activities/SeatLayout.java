@@ -1,55 +1,37 @@
 package com.infobrain.meroticket.Activities;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.infobrain.meroticket.R;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by rp on 11/20/17.
+ * Created by frank on 12/26/2017.
  */
 
-public class ChooseBusSeat extends AppCompatActivity implements View.OnClickListener {
+public class SeatLayout extends AppCompatActivity implements View.OnClickListener {
     private String layout_id = "2";
-    private TextView A01, A02, A03, A04, A05, A06, A07, A08, A09, A10, A11, A12, A13, A14, A15, A16, A17,A0A;
-    private TextView B01, B02, B03, B04, B05, B06, B07, B08, B09, B10, B11, B12, B13, B14, B15, B16, B17, B18;
-    private TextView C01, C02, C03;
+    private TextView A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17;
+    private TextView B1, B2, B3, B4, B5, B6, B7, B8, B9, B10, B11, B12, B13, B14, B15, B16, B17, B18;
+    private TextView C1, C2, C3;
     private TextView seat_all, price, proceed;
-    private String[] seat_id = {"A0A","A01", "A02", "A03", "A04", "A05", "A06", "A07", "A08", "A09", "A10", "A11", "A12", "A13", "A14", "A15", "A16", "A17", "B01", "B02", "B03", "B04", "B05", "B06", "B07", "B08", "B09", "B10", "B11", "B12", "B13", "B14", "B15", "B16", "B17", "B18", "C1", "C2", "C3"};
-    private String[] booked_Seats_no,booked_Seats_NO;
+    private String[] seat_id = {"A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12", "A13", "A14", "A15", "A16", "A17", "B1", "b2", "b3", "b4", "b5", "b6", "b7", "b8", "b9", "B10", "B11", "B12", "B13", "B14", "B15", "B16", "B17", "B18", "C1", "C2", "C3"};
+    private String[] booked_Seats_no = {"A1", "B10", "a9", "B17"};
     private ArrayList<String> seat_list = new ArrayList<String>();
-    private ArrayList<String> seat_booked = new ArrayList<String>();
     float SeatPrice, total_price;
+    private String bus_name, bus_price;
     private RelativeLayout card_snack;
-    private String date, routID, busId, bus_name, bus_layout, com_code, bus_price, bookedSeat;
 
-    private String tempBookedSeat;
 
     private Boolean seat_A1_flag = false;
     private Boolean seat_A2_flag = false;
@@ -94,29 +76,20 @@ public class ChooseBusSeat extends AppCompatActivity implements View.OnClickList
     private Boolean seat_C2_flag = false;
     private Boolean seat_C3_flag = false;
 
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.choose_busseat);
-        final Singleton c_code = (Singleton) getApplicationContext();
-        date = c_code.getDate();
-        routID = c_code.getRoute_id();
-        busId = c_code.getBus_id();
-        bus_price = c_code.getSeat_price();
-        com_code = c_code.getC_code();
-        bus_layout = c_code.getBus_layout();
-        bus_name = c_code.getBus_name();
-        SeatPrice = Float.parseFloat(bus_price);
-        inflate_layout(bus_layout);
-        loadSeatBooked(busId, routID, date, com_code);
-
-
+        bus_name = getIntent().getStringExtra("bus_name");
+        this.setTitle(bus_name);
+        bus_price = getIntent().getStringExtra("seat_price");
+        SeatPrice=Float.parseFloat(bus_price);
+        inflate_layout(layout_id);
     }
-
 
     private void inflate_layout(String code) {
         switch (code) {
-            case "Layout 4":
-                setContentView(R.layout.layout_4);
+            case "1":
+                setContentView(R.layout.linear_bus_layout);
                 card_snack = findViewById(R.id.bottom_snack_bar);
                 proceed = (findViewById(R.id.proceed));
                 price = findViewById(R.id.price);
@@ -125,31 +98,22 @@ public class ChooseBusSeat extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(getApplicationContext(), BordingPoint.class);
-                        final Singleton c_code = (Singleton) getApplicationContext();
-                        String selected_seat =String.valueOf(seat_list).replaceAll("\\[|\\]","");
-                        String total = Float.toString(total_price);
-                        c_code.setTotal_price(total);
-                        c_code.setSelected_no(selected_seat);
                         startActivity(intent);
-                        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
 
                     }
                 });
-                C01 = findViewById(R.id.C01);
-                A0A = findViewById(R.id.A0A);
-                C03 = findViewById(R.id.C03);
 
 
                 //A sides
-                A01 = findViewById(R.id.A01);
-                A02 = findViewById(R.id.A02);
-                A03 = findViewById(R.id.A03);
-                A04 = findViewById(R.id.A04);
-                A05 = findViewById(R.id.A05);
-                A06 = findViewById(R.id.A06);
-                A07 = findViewById(R.id.A07);
-                A08 = findViewById(R.id.A08);
-                A09 = findViewById(R.id.A09);
+                A1 = findViewById(R.id.A01);
+                A2 = findViewById(R.id.A02);
+                A3 = findViewById(R.id.A03);
+                A4 = findViewById(R.id.A04);
+                A5 = findViewById(R.id.A05);
+                A6 = findViewById(R.id.A06);
+                A7 = findViewById(R.id.A07);
+                A8 = findViewById(R.id.A08);
+                A9 = findViewById(R.id.A09);
                 A10 = findViewById(R.id.A10);
                 A11 = findViewById(R.id.A11);
                 A12 = findViewById(R.id.A12);
@@ -160,15 +124,15 @@ public class ChooseBusSeat extends AppCompatActivity implements View.OnClickList
                 A17 = findViewById(R.id.A17);
 
                 //B side seats
-                B01 = findViewById(R.id.B01);
-                B02 = findViewById(R.id.B02);
-                B03 = findViewById(R.id.B03);
-                B04 = findViewById(R.id.B04);
-                B05 = findViewById(R.id.B05);
-                B06 = findViewById(R.id.B06);
-                B07 = findViewById(R.id.B07);
-                B08 = findViewById(R.id.B08);
-                B09 = findViewById(R.id.B09);
+                B1 = findViewById(R.id.B01);
+                B2 = findViewById(R.id.B02);
+                B3 = findViewById(R.id.B03);
+                B4 = findViewById(R.id.B04);
+                B5 = findViewById(R.id.B05);
+                B6 = findViewById(R.id.B06);
+                B7 = findViewById(R.id.B07);
+                B8 = findViewById(R.id.B08);
+                B9 = findViewById(R.id.B09);
                 B10 = findViewById(R.id.B10);
                 B11 = findViewById(R.id.B11);
                 B12 = findViewById(R.id.B12);
@@ -179,15 +143,15 @@ public class ChooseBusSeat extends AppCompatActivity implements View.OnClickList
                 B17 = findViewById(R.id.B17);
                 B18 = findViewById(R.id.B18);
                 //click listener
-                A01.setOnClickListener(this);
-                A02.setOnClickListener(this);
-                A03.setOnClickListener(this);
-                A04.setOnClickListener(this);
-                A05.setOnClickListener(this);
-                A06.setOnClickListener(this);
-                A07.setOnClickListener(this);
-                A08.setOnClickListener(this);
-                A09.setOnClickListener(this);
+                A1.setOnClickListener(this);
+                A2.setOnClickListener(this);
+                A3.setOnClickListener(this);
+                A4.setOnClickListener(this);
+                A5.setOnClickListener(this);
+                A6.setOnClickListener(this);
+                A7.setOnClickListener(this);
+                A8.setOnClickListener(this);
+                A9.setOnClickListener(this);
                 A10.setOnClickListener(this);
                 A11.setOnClickListener(this);
                 A12.setOnClickListener(this);
@@ -196,15 +160,15 @@ public class ChooseBusSeat extends AppCompatActivity implements View.OnClickList
                 A15.setOnClickListener(this);
                 A16.setOnClickListener(this);
                 A17.setOnClickListener(this);
-                B01.setOnClickListener(this);
-                B02.setOnClickListener(this);
-                B03.setOnClickListener(this);
-                B04.setOnClickListener(this);
-                B05.setOnClickListener(this);
-                B06.setOnClickListener(this);
-                B07.setOnClickListener(this);
-                B08.setOnClickListener(this);
-                B09.setOnClickListener(this);
+                B1.setOnClickListener(this);
+                B2.setOnClickListener(this);
+                B3.setOnClickListener(this);
+                B4.setOnClickListener(this);
+                B5.setOnClickListener(this);
+                B6.setOnClickListener(this);
+                B7.setOnClickListener(this);
+                B8.setOnClickListener(this);
+                B9.setOnClickListener(this);
                 B10.setOnClickListener(this);
                 B11.setOnClickListener(this);
                 B12.setOnClickListener(this);
@@ -214,13 +178,12 @@ public class ChooseBusSeat extends AppCompatActivity implements View.OnClickList
                 B16.setOnClickListener(this);
                 B17.setOnClickListener(this);
                 B18.setOnClickListener(this);
-                C01.setOnClickListener(this);
-                A0A.setOnClickListener(this);
-                C03.setOnClickListener(this);
-                //checkSeat();
+
+
+                checkSeat();
                 break;
-            case "Layout 3":
-                setContentView(R.layout.layout_3);
+            case "2":
+                setContentView(R.layout.layout_4);
                 card_snack = findViewById(R.id.bottom_snack_bar);
                 proceed = (findViewById(R.id.proceed));
                 price = findViewById(R.id.price);
@@ -229,31 +192,24 @@ public class ChooseBusSeat extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(getApplicationContext(), BordingPoint.class);
-                        final Singleton c_code = (Singleton) getApplicationContext();
-                        String selected_seat =String.valueOf(seat_list).replaceAll("\\[|\\]","");
-                        String total = Float.toString(total_price);
-                        c_code.setTotal_price(total);
-                        c_code.setSelected_no(selected_seat);
                         startActivity(intent);
-                        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
 
                     }
                 });
-
                 //Cabinet SEATS
-                C01 = findViewById(R.id.C01);
-                A0A = findViewById(R.id.A0A);
-                C03 = findViewById(R.id.C03);
+                C1 = findViewById(R.id.C01);
+                C2 = findViewById(R.id.A0A);
+                C3 = findViewById(R.id.C03);
                 //A sides
-                A01 = findViewById(R.id.A01);
-                A02 = findViewById(R.id.A02);
-                A03 = findViewById(R.id.A03);
-                A04 = findViewById(R.id.A04);
-                A05 = findViewById(R.id.A05);
-                A06 = findViewById(R.id.A06);
-                A07 = findViewById(R.id.A07);
-                A08 = findViewById(R.id.A08);
-                A09 = findViewById(R.id.A09);
+                A1 = findViewById(R.id.A01);
+                A2 = findViewById(R.id.A02);
+                A3 = findViewById(R.id.A03);
+                A4 = findViewById(R.id.A04);
+                A5 = findViewById(R.id.A05);
+                A6 = findViewById(R.id.A06);
+                A7 = findViewById(R.id.A07);
+                A8 = findViewById(R.id.A08);
+                A9 = findViewById(R.id.A09);
                 A10 = findViewById(R.id.A10);
                 A11 = findViewById(R.id.A11);
                 A12 = findViewById(R.id.A12);
@@ -264,15 +220,15 @@ public class ChooseBusSeat extends AppCompatActivity implements View.OnClickList
                 A17 = findViewById(R.id.A17);
 
                 //B side seats
-                B01 = findViewById(R.id.B01);
-                B02 = findViewById(R.id.B02);
-                B03 = findViewById(R.id.B03);
-                B04 = findViewById(R.id.B04);
-                B05 = findViewById(R.id.B05);
-                B06 = findViewById(R.id.B06);
-                B07 = findViewById(R.id.B07);
-                B08 = findViewById(R.id.B08);
-                B09 = findViewById(R.id.B09);
+                B1 = findViewById(R.id.B01);
+                B2 = findViewById(R.id.B02);
+                B3 = findViewById(R.id.B03);
+                B4 = findViewById(R.id.B04);
+                B5 = findViewById(R.id.B05);
+                B6 = findViewById(R.id.B06);
+                B7 = findViewById(R.id.B07);
+                B8 = findViewById(R.id.B08);
+                B9 = findViewById(R.id.B09);
                 B10 = findViewById(R.id.B10);
                 B11 = findViewById(R.id.B11);
                 B12 = findViewById(R.id.B12);
@@ -283,15 +239,15 @@ public class ChooseBusSeat extends AppCompatActivity implements View.OnClickList
                 B17 = findViewById(R.id.B17);
                 B18 = findViewById(R.id.B18);
 
-                A01.setOnClickListener(this);
-                A02.setOnClickListener(this);
-                A03.setOnClickListener(this);
-                A04.setOnClickListener(this);
-                A05.setOnClickListener(this);
-                A06.setOnClickListener(this);
-                A07.setOnClickListener(this);
-                A08.setOnClickListener(this);
-                A09.setOnClickListener(this);
+                A1.setOnClickListener(this);
+                A2.setOnClickListener(this);
+                A3.setOnClickListener(this);
+                A4.setOnClickListener(this);
+                A5.setOnClickListener(this);
+                A6.setOnClickListener(this);
+                A7.setOnClickListener(this);
+                A8.setOnClickListener(this);
+                A9.setOnClickListener(this);
                 A10.setOnClickListener(this);
                 A11.setOnClickListener(this);
                 A12.setOnClickListener(this);
@@ -302,15 +258,15 @@ public class ChooseBusSeat extends AppCompatActivity implements View.OnClickList
                 A17.setOnClickListener(this);
 
 
-                B01.setOnClickListener(this);
-                B02.setOnClickListener(this);
-                B03.setOnClickListener(this);
-                B04.setOnClickListener(this);
-                B05.setOnClickListener(this);
-                B06.setOnClickListener(this);
-                B07.setOnClickListener(this);
-                B08.setOnClickListener(this);
-                B09.setOnClickListener(this);
+                B1.setOnClickListener(this);
+                B2.setOnClickListener(this);
+                B3.setOnClickListener(this);
+                B4.setOnClickListener(this);
+                B5.setOnClickListener(this);
+                B6.setOnClickListener(this);
+                B7.setOnClickListener(this);
+                B8.setOnClickListener(this);
+                B9.setOnClickListener(this);
                 B10.setOnClickListener(this);
                 B11.setOnClickListener(this);
                 B12.setOnClickListener(this);
@@ -320,27 +276,16 @@ public class ChooseBusSeat extends AppCompatActivity implements View.OnClickList
                 B16.setOnClickListener(this);
                 B17.setOnClickListener(this);
                 B18.setOnClickListener(this);
-                C01.setOnClickListener(this);
-                A0A.setOnClickListener(this);
-                C03.setOnClickListener(this);
+                C1.setOnClickListener(this);
+                C2.setOnClickListener(this);
+                C3.setOnClickListener(this);
 
-                //checkSeat();
+                checkSeat();
                 break;
 
         }
 
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-        if (id == R.id.action_image) {
-            DialogImage();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 
     public void priceAdd(float seat_price) {
         total_price = total_price + seat_price;
@@ -378,6 +323,7 @@ public class ChooseBusSeat extends AppCompatActivity implements View.OnClickList
 
 
     public void checkSeat() {
+
         List<String> values = new ArrayList<String>(Arrays.asList(booked_Seats_no));
         for (String string : seat_id) {
             if (values.contains(string)) {
@@ -387,8 +333,8 @@ public class ChooseBusSeat extends AppCompatActivity implements View.OnClickList
                 v.setBackgroundResource(R.drawable.ic_seat_booked);
                 v.setEnabled(false);
                 v.setClickable(false);
-                Log.e("RESID", Integer.toString(resID));
-                Log.e("BOOKED SEAT", string);
+           /*     Log.e("RESID",Integer.toString(resID));
+                Log.e("BOOKED SEAT",string);*/
             } else {
                 System.out.println("Action cannot be set");
             }
@@ -643,7 +589,7 @@ public class ChooseBusSeat extends AppCompatActivity implements View.OnClickList
                 }
                 break;
             case R.id.B01:
-                String seat_B1 = "B01";
+                String seat_B1 = "B1";
                 if (seat_B1_flag.equals(false)) {
                     view.setBackgroundResource(R.drawable.ic_seat_selected);
                     addData(seat_B1);
@@ -880,7 +826,6 @@ public class ChooseBusSeat extends AppCompatActivity implements View.OnClickList
                     seat_B17_flag = false;
                 }
                 break;
-
             case R.id.B18:
                 String seat_B18 = "B18";
                 if (seat_B18_flag.equals(false)) {
@@ -939,84 +884,4 @@ public class ChooseBusSeat extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.image_menu, menu);
-        MenuItem item = menu.findItem(R.id.action_image);
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-        }
-
-        return false;
-    }
-
-
-    public void DialogImage() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        LayoutInflater inflater = this.getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.show_image_viewer, null);
-        builder.setView(dialogView);
-        final AlertDialog dialog = builder.create();
-
-        dialog.show();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(ChooseBusSeat.this, BusActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
-
-    }
-
-    public void loadSeatBooked(String bus_id, String route_id, String bus_date, String company_code) {
-        String url = "https://laxmicapital.com.np/abc/services/webservice.asmx/Get_Searched_Bus_Booked_Seats?Bus_Id=" + bus_id + "&Route_Id=" + route_id + "&Date=" + bus_date + "&C_Code=" + company_code;
-        Log.e("URL", url);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    //Toast.makeText(BusActivity.this, response, Toast.LENGTH_SHORT).show();
-                    JSONArray array = jsonObject.getJSONArray("Table");
-                    //Toast.makeText(BusActivity.this, String.valueOf(array), Toast.LENGTH_SHORT).show();
-                    JSONObject contain = array.getJSONObject(0);
-                    tempBookedSeat = contain.getString("Seat_No");
-                    bookedSeat = tempBookedSeat.replaceAll(" ","");
-
-                    Log.e("BOOKED SEAT", tempBookedSeat);
-                    Log.e("BOOKED SEAT", bookedSeat);
-
-                    String split = ",";
-                    booked_Seats_no = bookedSeat.split(split);
-                    checkSeat();
-
-
-                } catch (JSONException e) {
-                    Log.e("ERROR:", e.getMessage());
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //Toast.makeText(BusActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-
-            }
-
-        });
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(90000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        requestQueue.add(stringRequest);
-
-    }
-
-
 }

@@ -7,4 +7,5 @@
     <color name="icon_color">#e74c3c</color>
     <color name="tint_black">#464141</color>
     <color name="hintcolor">#fb595858</color>
+    <color name="seattext">#3e3d3d</color>
 </resources>
